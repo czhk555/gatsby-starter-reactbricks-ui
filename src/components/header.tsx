@@ -18,6 +18,9 @@ const Header: React.FC = () => (
             <Link to="/about-us" className="text-gray-500 hover:text-pink-700">
               About us
             </Link>
+            <Link to="/blog" className="text-gray-500 hover:text-pink-700">
+              Blog
+            </Link>
           </div>
         </div>
         <a

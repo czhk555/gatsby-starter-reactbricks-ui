@@ -9,6 +9,14 @@ const pageTypes: types.IPageType[] = [
     defaultLanguage: 'en',
     getDefaultContent: () => [],
   },
+  {
+    name: 'blog',
+    pluralName: 'Blog',
+    defaultLocked: false,
+    defaultStatus: types.PageStatus.Published,
+    defaultLanguage: 'en',
+    getDefaultContent: () => [],
+  },
 ]
 
 export default pageTypes

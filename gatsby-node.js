@@ -5,6 +5,7 @@ require('dotenv').config({
 const bluebird = require('bluebird')
 const fetchPages = require('react-bricks/frontend').fetchPages
 const fetchPage = require('react-bricks/frontend').fetchPage
+const fetchTags = require('react-bricks/frontend').fetchTags
 
 exports.createPages = async ({ actions: { createPage } }) => {
   const appId = process.env.GATSBY_APP_ID
@@ -22,7 +23,15 @@ exports.createPages = async ({ actions: { createPage } }) => {
     return
   }
 
-  const allPages = await fetchPages(apiKey)
+  const { items: tags } = await fetchTags(apiKey)
+  tags.sort()
+
+  const allPages = await fetchPages(apiKey, {
+    pageSize: 1000,
+    sort: '-publishedAt',
+  })
+
+  const homePage = await fetchPage('home', apiKey)
 
   if (!allPages || allPages.length === 0) {
     console.error(
@@ -36,16 +45,15 @@ exports.createPages = async ({ actions: { createPage } }) => {
     return
   }
 
-  const allPagesWithContent = await bluebird.map(
-    allPages,
-    (page) => {
-      return fetchPage(page.slug, apiKey)
-    },
-    { concurrency: 2 }
+  const posts = allPages.filter((page) => page.type === 'blog')
+
+  const popularPosts = allPages.filter(
+    (page) => page.type === 'blog' && page.tags?.includes('popular')
+  )
+  const pages = allPages.filter(
+    (page) => page.type !== 'blog' && page.slug !== 'home'
   )
 
-  // Home Page
-  const homePage = allPagesWithContent.find((page) => page.slug === 'home')
   if (homePage) {
     createPage({
       path: `/`,
@@ -53,6 +61,20 @@ exports.createPages = async ({ actions: { createPage } }) => {
       context: { page: homePage },
     })
   }
+
+  createPage({
+    path: `/blog`,
+    component: require.resolve('./src/templates/blog.tsx'),
+    context: { posts, tags },
+  })
+
+  const allPagesWithContent = await bluebird.map(
+    pages,
+    (page) => {
+      return fetchPage(page.slug, apiKey)
+    },
+    { concurrency: 2 }
+  )
 
   // Other pages
   allPagesWithContent
@@ -64,4 +86,23 @@ exports.createPages = async ({ actions: { createPage } }) => {
         context: { page },
       })
     })
+
+  tags.forEach((tag) => {
+    const pagesByTag = posts.filter((page) => page.tags?.includes(tag))
+
+    createPage({
+      path: `/blog/tag/${tag}`,
+      component: require.resolve('./src/templates/tag.tsx'),
+      context: { posts: pagesByTag, filterTag: tag, popularPosts, tags },
+    })
+  })
+
+  for (const { slug } of posts) {
+    const page = await fetchPage(slug, apiKey)
+    createPage({
+      path: `/blog/${page.slug}/`,
+      component: require.resolve('./src/templates/page.tsx'),
+      context: { page },
+    })
+  }
 }
