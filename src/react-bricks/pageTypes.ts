@@ -8,6 +8,16 @@ const pageTypes: types.IPageType[] = [
     defaultStatus: types.PageStatus.Published,
     defaultLanguage: 'en',
     getDefaultContent: () => [],
+    excludedBlockTypes: [
+      'title',
+      'paragraph',
+      'quote',
+      'video',
+      'code-block',
+      'tweet',
+      'tweet-light',
+      'image',
+    ],
   },
   {
     name: 'blog',
@@ -16,6 +26,16 @@ const pageTypes: types.IPageType[] = [
     defaultStatus: types.PageStatus.Published,
     defaultLanguage: 'en',
     getDefaultContent: () => [],
+    allowedBlockTypes: [
+      'title',
+      'paragraph',
+      'quote',
+      'video',
+      'code-block',
+      'tweet',
+      'tweet-light',
+      'image',
+    ],
   },
 ]
 
