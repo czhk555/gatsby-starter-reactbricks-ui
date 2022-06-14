@@ -38,7 +38,7 @@ const Page: React.FC<ReactBricksPageProps> = ({
               key={post.id}
               title={post.name}
               href={post.slug}
-              content={post.meta.description}
+              content={post.meta.description || ''}
             />
           ))}
         </section>
