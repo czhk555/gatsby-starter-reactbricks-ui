@@ -7,7 +7,7 @@
   "dependencies": {
     "autoprefixer": "^10.4.7",
     "bluebird": "^3.7.2",
-    "gatsby": "^4.19.0",
+    "gatsby": "^4.19.1",
     "gatsby-plugin-manifest": "^4.19.0",
     "gatsby-plugin-offline": "^5.19.0",
     "gatsby-plugin-postcss": "^5.19.0",
@@ -17,7 +17,7 @@
     "prismjs": "^1.28.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-bricks": "^3.3.0",
+    "react-bricks": "^3.3.1",
     "react-bricks-ui": "^0.5.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
