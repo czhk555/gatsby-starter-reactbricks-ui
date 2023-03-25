@@ -20,6 +20,14 @@ const pageTypes: types.IPageType[] = [
     ],
   },
   {
+    name: 'layout',
+    pluralName: 'layout',
+    defaultLocked: false,
+    defaultStatus: types.PageStatus.Published,
+    getDefaultContent: () => [],
+    isEntity: true,
+  },
+  {
     name: 'blog',
     pluralName: 'Blog',
     defaultLocked: false,

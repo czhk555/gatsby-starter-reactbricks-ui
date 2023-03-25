@@ -29,6 +29,7 @@ const config: types.ReactBricksConfig = {
   enableAutoSave: true,
   disableSaveIfInvalidProps: false,
   enablePreview: true,
+  enablePreviewImage: true,
 }
 
 export default config

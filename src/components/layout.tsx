@@ -1,18 +1,19 @@
-import React, { ReactNode } from 'react'
-
-import Header from './header'
-import Footer from './footer'
+import React, { ReactNode, useContext } from 'react'
+import { ReactBricksContext } from 'react-bricks'
 
 interface LayoutProps {
   children?: ReactNode
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { isDarkColorMode } = useContext(ReactBricksContext)
   return (
-    <div className="flex flex-col h-screen justify-between font-content antialiased">
-      <Header />
+    <div
+      className={`${
+        isDarkColorMode ? 'dark' : 'light'
+      } flex flex-col h-screen justify-between font-content antialiased`}
+    >
       <main className="mb-auto">{children}</main>
-      <Footer />
     </div>
   )
 }
