@@ -5,6 +5,7 @@
   "version": "1.3.6",
   "author": "Matteo Frana <f2@f2.net>",
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.14",
     "bluebird": "^3.7.2",
     "gatsby": "^5.8.0",

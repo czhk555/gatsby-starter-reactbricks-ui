@@ -56,8 +56,6 @@ exports.createPages = async ({ actions: { createPage } }) => {
     sort: '-publishedAt',
   })
 
-  const homePage = await fetchPage('home', apiKey)
-
   if (!allPages || allPages.length === 0) {
     console.error(
       'No published page was found. Please, create at least one page from the /admin interface.'
@@ -83,30 +81,21 @@ exports.createPages = async ({ actions: { createPage } }) => {
   const popularPosts = allPages.filter(
     (page) => page.type === 'blog' && page.tags?.includes('popular')
   )
-  const pages = allPages.filter(
-    (page) => page.type !== 'blog' && page.slug !== 'home'
-  )
-
-  if (homePage) {
-    createPage({
-      path: `/`,
-      component: require.resolve('./src/templates/page.tsx'),
-      context: {
-        page: homePage,
-        header: header,
-        footer: footer,
-        errorKeys: errorKeys,
-        errorPage: errorPage,
-        errorHeader: errorHeader,
-        errorFooter: errorFooter,
-      },
-    })
-  }
+  const pages = allPages.filter((page) => page.type !== 'blog')
 
   createPage({
     path: `/blog`,
     component: require.resolve('./src/templates/blog.tsx'),
-    context: { posts, tags },
+    context: {
+      posts,
+      tags,
+      header: header,
+      footer: footer,
+      errorKeys: errorKeys,
+      errorPage: errorPage,
+      errorHeader: errorHeader,
+      errorFooter: errorFooter,
+    },
   })
 
   const allPagesWithContent = await bluebird.map(
@@ -117,24 +106,22 @@ exports.createPages = async ({ actions: { createPage } }) => {
     { concurrency: 2 }
   )
 
-  // Other pages
-  allPagesWithContent
-    .filter((page) => page.slug !== 'home')
-    .forEach((page) => {
-      createPage({
-        path: `/${page.slug}/`,
-        component: require.resolve('./src/templates/page.tsx'),
-        context: {
-          page: page,
-          header: header,
-          footer: footer,
-          errorKeys: errorKeys,
-          errorPage: errorPage,
-          errorHeader: errorHeader,
-          errorFooter: errorFooter,
-        },
-      })
+  // Pages
+  allPagesWithContent.forEach((page) => {
+    createPage({
+      path: `/${page.slug}/`,
+      component: require.resolve('./src/templates/page.tsx'),
+      context: {
+        page: page,
+        header: header,
+        footer: footer,
+        errorKeys: errorKeys,
+        errorPage: errorPage,
+        errorHeader: errorHeader,
+        errorFooter: errorFooter,
+      },
     })
+  })
 
   tags.forEach((tag) => {
     const pagesByTag = posts.filter((page) => page.tags?.includes(tag))
@@ -142,7 +129,18 @@ exports.createPages = async ({ actions: { createPage } }) => {
     createPage({
       path: `/blog/tag/${tag}`,
       component: require.resolve('./src/templates/tag.tsx'),
-      context: { posts: pagesByTag, filterTag: tag, popularPosts, tags },
+      context: {
+        posts: pagesByTag,
+        filterTag: tag,
+        popularPosts,
+        tags,
+        header: header,
+        footer: footer,
+        errorKeys: errorKeys,
+        errorPage: errorPage,
+        errorHeader: errorHeader,
+        errorFooter: errorFooter,
+      },
     })
   })
 
@@ -151,7 +149,15 @@ exports.createPages = async ({ actions: { createPage } }) => {
     createPage({
       path: `/blog/${page.slug}/`,
       component: require.resolve('./src/templates/page.tsx'),
-      context: { page },
+      context: {
+        page,
+        header: header,
+        footer: footer,
+        errorKeys: errorKeys,
+        errorPage: errorPage,
+        errorHeader: errorHeader,
+        errorFooter: errorFooter,
+      },
     })
   }
 }

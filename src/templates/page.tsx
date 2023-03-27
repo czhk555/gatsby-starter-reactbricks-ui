@@ -9,7 +9,6 @@ import {
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import ErrorNoKeys from '../components/errorNoKeys'
-import ErrorNoPage from '../components/errorNoPage'
 import ErrorNoHeader from '../components/errorNoHeader'
 import ErrorNoFooter from '../components/errorNoFooter'
 
@@ -46,27 +45,29 @@ const Page: React.FC<ReactBricksPageProps> = ({
 
   return (
     <Layout>
-      {pageOk && !errorPage ? (
-        <Seo
-          title={page.meta.title}
-          description={page.meta.description}
-          lang={page.meta.language}
-        />
-      ) : (
-        <></>
-      )}
-      {headerOk && !errorHeader ? (
-        <PageViewer page={headerOk} />
-      ) : (
-        <ErrorNoHeader />
-      )}
-      {pageOk && !errorPage ? <PageViewer page={pageOk} /> : <ErrorNoPage />}
-      {footerOk && !errorFooter ? (
-        <PageViewer page={footerOk} />
-      ) : (
-        <ErrorNoFooter />
-      )}
+      {pageOk && !errorPage && (
+        <>
+          <Seo
+            title={page.meta.title!}
+            description={page.meta.description}
+            lang={page.meta.language}
+          />
 
+          {headerOk && !errorHeader ? (
+            <PageViewer page={headerOk} />
+          ) : (
+            <ErrorNoHeader />
+          )}
+
+          <PageViewer page={pageOk} />
+
+          {footerOk && !errorFooter ? (
+            <PageViewer page={footerOk} />
+          ) : (
+            <ErrorNoFooter />
+          )}
+        </>
+      )}
       {errorKeys === 'NOKEYS' && <ErrorNoKeys />}
     </Layout>
   )
