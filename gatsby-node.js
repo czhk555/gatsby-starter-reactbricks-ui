@@ -107,21 +107,23 @@ exports.createPages = async ({ actions: { createPage } }) => {
   )
 
   // Pages
-  allPagesWithContent.forEach((page) => {
-    createPage({
-      path: `/${page.slug}/`,
-      component: require.resolve('./src/templates/page.tsx'),
-      context: {
-        page: page,
-        header: header,
-        footer: footer,
-        errorKeys: errorKeys,
-        errorPage: errorPage,
-        errorHeader: errorHeader,
-        errorFooter: errorFooter,
-      },
+  allPagesWithContent
+    .filter((page) => page.slug !== 'header' && page.slug !== 'footer')
+    .forEach((page) => {
+      createPage({
+        path: `/${page.slug}/`,
+        component: require.resolve('./src/templates/page.tsx'),
+        context: {
+          page: page,
+          header: header,
+          footer: footer,
+          errorKeys: errorKeys,
+          errorPage: errorPage,
+          errorHeader: errorHeader,
+          errorFooter: errorFooter,
+        },
+      })
     })
-  })
 
   tags.forEach((tag) => {
     const pagesByTag = posts.filter((page) => page.tags?.includes(tag))

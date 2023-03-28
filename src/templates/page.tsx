@@ -45,7 +45,7 @@ const Page: React.FC<ReactBricksPageProps> = ({
 
   return (
     <Layout>
-      {pageOk && !errorPage && (
+      {pageOk && !errorPage && !errorKeys && (
         <>
           <Seo
             title={page.meta.title!}
@@ -68,7 +68,7 @@ const Page: React.FC<ReactBricksPageProps> = ({
           )}
         </>
       )}
-      {errorKeys === 'NOKEYS' && <ErrorNoKeys />}
+      {errorKeys && <ErrorNoKeys />}
     </Layout>
   )
 }
