@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme")
+
 module.exports = {
   content: [
     './src/pages/**/*.tsx',
@@ -7,5 +9,11 @@ module.exports = {
     './node_modules/react-bricks-ui/**/*.js',
   ],
   darkMode: 'class',
-  theme: {},
+  theme: {
+    extend:{
+      fontFamily:{
+        sans:['Nunito Sans', ...defaultTheme.fontFamily.sans]
+      }
+    }
+  },
 }
