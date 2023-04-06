@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Children } from 'react'
 import { Text, RichText, Image, types } from 'react-bricks/frontend'
 
 //=============================
@@ -17,11 +17,7 @@ interface HeroUnitProps {
 //=============================
 const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
   return (
-    <div
-      className={`max-w-xl mx-auto px-6 ${
-        padding === 'big' ? 'py-20' : 'py-12'
-      }`}
-    >
+    <div className={`max-w-xl mx-auto px-6 ${padding === 'big' ? 'py-20' : 'py-12'}`}>
       <div>
         <Image
           propName="icon"
@@ -36,11 +32,9 @@ const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
               {props.children}
             </h1>
           )}
+          renderPlaceholder={(props) => <span className="opacity-30">{props.children}</span>}
           placeholder="Type a title..."
           propName="title"
-          renderPlaceholder={(props) => (
-            <span className="opacity-30">{props.children}</span>
-          )}
         />
         <RichText
           renderBlock={(props) => (
@@ -74,6 +68,7 @@ const MyHeroUnit: types.Brick<HeroUnitProps> = ({ padding }) => {
 MyHeroUnit.schema = {
   name: 'my-hero-unit',
   label: 'Custom Hero Unit',
+  previewImageUrl: `/bricks-preview-images/custom-hero-unit.png`,
   getDefaultProps: () => ({
     padding: 'big',
     title: 'This is a custom Hero Unit',
