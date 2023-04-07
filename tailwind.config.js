@@ -2,9 +2,9 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
-    './pages/**/*.tsx',
-    './components/**/*.tsx',
-    './react-bricks/**/*.{ts,tsx}',
+    './src/pages/**/*.tsx',
+    './src/components/**/*.tsx',
+    './src/react-bricks/**/*.{ts,tsx}',
   ],
   darkMode: 'class',
   theme: {
