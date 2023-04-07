@@ -5,8 +5,6 @@
   "version": "1.3.6",
   "author": "Matteo Frana <f2@f2.net>",
   "dependencies": {
-    "@tailwindcss/forms": "^0.5.3",
-    "autoprefixer": "^10.4.14",
     "bluebird": "^3.7.2",
     "email-validator": "^2.0.4",
     "gatsby": "^5.8.0",
@@ -16,7 +14,6 @@
     "gatsby-plugin-react-helmet": "^6.8.0",
     "jsonp": "^0.2.1",
     "pigeon-maps": "^0.21.3",
-    "postcss": "^8.4.21",
     "prism-theme-night-owl": "^1.4.0",
     "prismjs": "^1.29.0",
     "prop-types": "^15.8.1",
@@ -30,9 +27,13 @@
   "devDependencies": {
     "@types/react": "^18.0.29",
     "@types/react-helmet": "^6.1.6",
+    "autoprefixer": "^10.4.14",
     "concurrently": "^7.6.0",
+    "postcss": "^8.4.21",
     "prettier": "^2.8.7",
-    "tailwindcss": "^3.2.7"
+    "tailwindcss": "^3.2.7",
+    "@tailwindcss/forms": "^0.5.3"
+    
   },
   "keywords": [
     "gatsby",
