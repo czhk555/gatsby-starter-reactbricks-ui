@@ -16,7 +16,7 @@ const pageTypes: types.IPageType[] = [
       'code-block',
       'tweet',
       'tweet-light',
-      'image',
+      'big-image',
     ],
   },
   {
@@ -42,7 +42,7 @@ const pageTypes: types.IPageType[] = [
       'code-block',
       'tweet',
       'tweet-light',
-      'image',
+      'big-image',
     ],
   },
 ]
