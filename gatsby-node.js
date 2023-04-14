@@ -1,7 +1,7 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
-
+const config = require('./src/react-bricks/config')
 const bluebird = require('bluebird')
 const fetchPages = require('react-bricks/frontend').fetchPages
 const fetchPage = require('react-bricks/frontend').fetchPage
@@ -111,7 +111,7 @@ exports.createPages = async ({ actions: { createPage } }) => {
     .filter((page) => page.slug !== 'header' && page.slug !== 'footer')
     .forEach((page) => {
       createPage({
-        path: page.slug === "/" ? page.slug : `/${page.slug}/`,
+        path: page.slug === '/' ? page.slug : `/${page.slug}/`,
         component: require.resolve('./src/templates/page.tsx'),
         context: {
           page: page,
@@ -147,7 +147,7 @@ exports.createPages = async ({ actions: { createPage } }) => {
   })
 
   for (const { slug } of posts) {
-    const page = await fetchPage(slug, apiKey)
+    const page = await fetchPage(slug, apiKey, undefined, config.pageTypes)
     createPage({
       path: `/blog/${page.slug}/`,
       component: require.resolve('./src/templates/page.tsx'),

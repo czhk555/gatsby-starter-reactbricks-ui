@@ -32,18 +32,25 @@ const pageTypes: types.IPageType[] = [
     pluralName: 'Blog',
     defaultLocked: false,
     defaultStatus: types.PageStatus.Published,
-    defaultLanguage: 'en',
     getDefaultContent: () => [],
     allowedBlockTypes: [
       'title',
       'paragraph',
-      'quote',
+      'big-image',
       'video',
-      'code-block',
+      'code',
       'tweet',
       'tweet-light',
-      'big-image',
+      'blog-title',
+      'newsletter-subscribe',
+      'external-data-example',
     ],
+    getExternalData: () =>
+      fetch('https://catfact.ninja/fact')
+        .then((response) => response.json())
+        .then((data) => ({
+          catFact: data.fact,
+        })),
   },
 ]
 
