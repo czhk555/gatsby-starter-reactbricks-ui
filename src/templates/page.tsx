@@ -1,11 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { PageProps } from 'gatsby'
-import {
-  PageViewer,
-  cleanPage,
-  ReactBricksContext,
-  types,
-} from 'react-bricks/frontend'
+import { PageViewer, cleanPage, types } from 'react-bricks/frontend'
+import { useReactBricksContext } from 'react-bricks/frontend'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import ErrorNoKeys from '../components/errorNoKeys'
@@ -35,7 +31,7 @@ const Page: React.FC<ReactBricksPageProps> = ({
     errorFooter,
   },
 }) => {
-  const { pageTypes, bricks } = useContext(ReactBricksContext)
+  const { pageTypes, bricks } = useReactBricksContext()
 
   // Clean the received content
   // Removes unknown or not allowed bricks

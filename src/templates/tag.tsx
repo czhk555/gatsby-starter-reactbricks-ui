@@ -1,12 +1,8 @@
 import classNames from 'classnames'
 import { Link } from 'gatsby'
-import React, { useContext } from 'react'
-import {
-  cleanPage,
-  PageViewer,
-  ReactBricksContext,
-  types,
-} from 'react-bricks/frontend'
+import React from 'react'
+import { cleanPage, PageViewer, types } from 'react-bricks/frontend'
+import { useReactBricksContext } from 'react-bricks/frontend'
 import PostListItem from '../components/PostListItem'
 import ErrorNoKeys from '../components/errorNoKeys'
 import ErrorNoHeader from '../components/errorNoHeader'
@@ -42,7 +38,7 @@ const tagPage: React.FC<PageProps> = ({
     errorFooter,
   },
 }) => {
-  const { pageTypes, bricks } = useContext(ReactBricksContext)
+  const { pageTypes, bricks } = useReactBricksContext()
 
   const headerOk = header ? cleanPage(header, pageTypes, bricks) : null
   const footerOk = footer ? cleanPage(footer, pageTypes, bricks) : null
