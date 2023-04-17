@@ -1,8 +1,8 @@
-import { Link } from 'gatsby'
 import React from 'react'
 import { cleanPage, types, PageViewer } from 'react-bricks/frontend'
 import { useReactBricksContext } from 'react-bricks/frontend'
 import PostListItem from '../components/PostListItem'
+import TagListItem from '../components/TagListItem'
 import ErrorNoKeys from '../components/errorNoKeys'
 import ErrorNoHeader from '../components/errorNoHeader'
 import ErrorNoFooter from '../components/errorNoFooter'
@@ -51,67 +51,38 @@ const Page: React.FC<ReactBricksPageProps> = ({
           ) : (
             <ErrorNoHeader />
           )}
-          <h1 className="text-center text-4xl sm:text-6xl lg:text-7xl leading-none font-black tracking-tight text-gray-900 pb-4 mt-10 sm:mt-12 mb-4">
-            Blog
-          </h1>
-          <div className="max-w-6xl mx-auto px-8 py-16 flex space-x-24">
-            <section className="flex-[2] space-y-8">
-              <h2 className="text-pink-500 uppercase mb-8 tracking-widest font-bold">
-                Recently published
-              </h2>
-              {posts?.map((post) => (
-                <PostListItem
-                  key={post.id}
-                  title={post.name}
-                  href={post.slug}
-                  content={post.meta.description || ''}
-                />
-              ))}
-            </section>
-            <section className="flex-1 space-y-16">
-              <div>
-                <h2 className="text-pink-500 uppercase mb-8 tracking-widest font-bold">
-                  Tags
-                </h2>
-                <div className="flex flex-wrap items-center">
-                  {/* T A G  */}
-                  {tags
-                    ?.filter((tag) => tag !== 'popular')
-                    .map((tag) => (
-                      <Link
-                        to={`/blog/tag/${tag}`}
-                        key={tag}
-                        className="inline-block text-sm font-bold mr-2 mb-2 transform duration-200 text-cyan-800 bg-cyan-100 hover:bg-cyan-200 hover:text-cyan-900 rounded-md px-2 py-1"
-                      >
-                        <div className="" style={{ zIndex: -1 }} />
-                        {tag}
-                      </Link>
-                    ))}
-                  {/*  */}
-                </div>
+          <div className="bg-white dark:bg-gray-900">
+            <div className="max-w-6xl mx-auto px-8 py-16">
+              <h1 className="max-w-2xl text-4xl sm:text-6xl lg:text-4xl font-bold tracking-tight text-gray-900 dark:text-white pb-4 mt-10 sm:mt-12 mb-4">
+                Our latest articles
+              </h1>
+
+              <div className="flex flex-wrap items-center">
+                {tags
+                  ?.filter((tag) => tag !== 'popular')
+                  .map((tag) => (
+                    <TagListItem tag={tag} key={tag} />
+                  ))}
               </div>
-              <div>
-                <h2 className="text-pink-500 uppercase mb-8 tracking-widest font-bold">
-                  Most Popular
-                </h2>
-                <ul>
-                  {posts
-                    ?.filter((post) =>
-                      post.tags.find((tag) => tag === 'popular')
-                    )
-                    .map((post) => (
-                      <li key={post.id}>
-                        <Link
-                          to={`/blog/${post.slug}`}
-                          className="text-gray-900 hover:text-cyan-600 font-bold text-lg leading-10 transition-colors"
-                        >
-                          {post.name}
-                        </Link>
-                      </li>
-                    ))}
-                </ul>
+
+              <hr className="mt-6 mb-10 dark:border-gray-600" />
+
+              <div className="grid lg:grid-cols-2 xl:grid-cols-3 sm:gap-12">
+                {posts?.map((post) => {
+                  return (
+                    <PostListItem
+                      key={post.id}
+                      title={post.meta.title || ''}
+                      href={post.slug}
+                      content={post.meta.description || ''}
+                      author={post.author}
+                      date={post.publishedAt || ''}
+                      featuredImg={post.meta.featuredImage || ''}
+                    />
+                  )
+                })}
               </div>
-            </section>
+            </div>
           </div>
           {footerOk && !errorFooter ? (
             <PageViewer page={footerOk} />
