@@ -68,9 +68,7 @@ const tagPage: React.FC<PageProps> = ({
               </div>
 
               <div className="flex flex-wrap items-center">
-                {tags
-                  ?.filter((tag) => tag !== 'popular')
-                  .map((tag) => (
+                {tags?.map((tag) => (
                     <TagListItem tag={tag} key={tag} />
                   ))}
               </div>
