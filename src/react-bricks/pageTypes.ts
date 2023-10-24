@@ -6,26 +6,7 @@ const pageTypes: types.IPageType[] = [
     pluralName: 'pages',
     defaultLocked: false,
     defaultStatus: types.PageStatus.Published,
-    defaultLanguage: 'en',
     getDefaultContent: () => [],
-    excludedBlockTypes: [
-      'title',
-      'paragraph',
-      'quote',
-      'video',
-      'code-block',
-      'tweet',
-      'tweet-light',
-      'big-image',
-    ],
-  },
-  {
-    name: 'layout',
-    pluralName: 'layout',
-    defaultLocked: false,
-    defaultStatus: types.PageStatus.Published,
-    getDefaultContent: () => [],
-    isEntity: true,
   },
   {
     name: 'blog',
@@ -59,6 +40,15 @@ const pageTypes: types.IPageType[] = [
           console.log(error)
           return {}
         }),
+  },
+
+  {
+    name: 'layout',
+    pluralName: 'layout',
+    defaultLocked: false,
+    defaultStatus: types.PageStatus.Published,
+    getDefaultContent: () => [],
+    isEntity: true,
   },
 ]
 
