@@ -76,7 +76,7 @@ export default Page
 // Head tag content (meta tag and JsonLd)
 export const Head = ({ pageContext: { page } }) => (
   <>
-    {renderMeta(page)}
-    {renderJsonLd(page)}
+    {page && renderMeta(page)}
+    {page && renderJsonLd(page)}
   </>
 )
