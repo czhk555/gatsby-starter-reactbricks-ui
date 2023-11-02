@@ -59,8 +59,8 @@ const Page: React.FC<ReactBricksPageProps> = ({
 
               <div className="flex flex-wrap items-center">
                 {tags?.map((tag) => (
-                    <TagListItem tag={tag} key={tag} />
-                  ))}
+                  <TagListItem tag={tag} key={tag} />
+                ))}
               </div>
 
               <hr className="mt-6 mb-10 dark:border-gray-600" />
@@ -75,7 +75,7 @@ const Page: React.FC<ReactBricksPageProps> = ({
                       content={post.meta.description || ''}
                       author={post.author}
                       date={post.publishedAt || ''}
-                      featuredImg={post.meta.featuredImage || ''}
+                      featuredImg={post.meta.image}
                     />
                   )
                 })}
