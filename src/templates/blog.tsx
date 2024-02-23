@@ -47,7 +47,7 @@ const Page: React.FC<ReactBricksPageProps> = ({
             lang="en"
           />
           {headerOk && !errorHeader ? (
-            <PageViewer page={headerOk} showClickToEdit={false} />
+            <PageViewer page={headerOk} />
           ) : (
             <ErrorNoHeader />
           )}
@@ -83,7 +83,7 @@ const Page: React.FC<ReactBricksPageProps> = ({
             </div>
           </div>
           {footerOk && !errorFooter ? (
-            <PageViewer page={footerOk} showClickToEdit={false} />
+            <PageViewer page={footerOk} />
           ) : (
             <ErrorNoFooter />
           )}

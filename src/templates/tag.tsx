@@ -48,7 +48,7 @@ const tagPage: React.FC<PageProps> = ({
         <>
           <Seo title={filterTag} description={filterTag} lang="en" />
           {headerOk && !errorHeader ? (
-            <PageViewer page={headerOk} showClickToEdit={false} />
+            <PageViewer page={headerOk} />
           ) : (
             <ErrorNoHeader />
           )}
@@ -91,7 +91,7 @@ const tagPage: React.FC<PageProps> = ({
             </div>
           </div>
           {footerOk && !errorFooter ? (
-            <PageViewer page={footerOk} showClickToEdit={false} />
+            <PageViewer page={footerOk} />
           ) : (
             <ErrorNoFooter />
           )}
